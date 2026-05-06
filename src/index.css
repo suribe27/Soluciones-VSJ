@@ -36,10 +36,23 @@ h1, h2, h3, h4 {
 }
 
 /* Base styles for the mobile simulation */
+/* ANTES */
 .app-container {
   width: 100%;
   max-width: 390px;
   height: 844px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  box-shadow: 0 0 40px rgba(0, 51, 66, 0.1);
+}
+
+/* DESPUÉS */
+.app-container {
+  width: 100%;
+  max-width: 390px;
+  height: 100dvh;
   margin: 0 auto;
   position: relative;
   overflow: hidden;

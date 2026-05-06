@@ -15,7 +15,7 @@ export default function BottomNav({ currentScreen, setScreen }: BottomNavProps) 
   ];
 
   return (
-    <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-8 pt-3 glass-nav rounded-t-[3rem] shadow-[0_-4px_20px_rgba(0,51,66,0.05)] border-t border-on-surface/5">
+    <nav className="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-2 pt-3 glass-nav rounded-t-[3rem] shadow-[0_-4px_20px_rgba(0,51,66,0.05)] border-t border-on-surface/5">
       {items.map((item) => {
         const Icon = item.icon;
         const isActive = currentScreen === item.id;
