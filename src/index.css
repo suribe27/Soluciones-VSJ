@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Be+Vietnam+Pro:wght@400;500;600&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-plus-jakarta: "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-be-vietnam: "Be Vietnam Pro", ui-sans-serif, system-ui, sans-serif;
+
+  --color-primary: #006575;
+  --color-on-primary: #ddf7ff;
+  --color-primary-container: #88e1f8;
+  --color-on-primary-container: #00515f;
+  
+  --color-surface: #ecf8ff;
+  --color-on-surface: #003342;
+  --color-on-surface-variant: #306274;
+  
+  --color-surface-container-low: #dff4ff;
+  --color-surface-container-highest: #abe5ff;
+  --color-surface-container-lowest: #ffffff;
+  
+  --color-error-container: #fb5151;
+  --color-tertiary-container: #89b0ff;
+  
+  --radius-lg: 2rem;
+  --radius-xl: 3rem;
+}
+
+body {
+  font-family: var(--font-be-vietnam);
+  background-color: var(--color-surface);
+  color: var(--color-on-surface);
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-plus-jakarta);
+}
+
+/* Base styles for the mobile simulation */
+.app-container {
+  width: 100%;
+  max-width: 390px;
+  height: 844px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-surface);
+  box-shadow: 0 0 40px rgba(0, 51, 66, 0.1);
+}
+
+.glass-nav {
+  background-color: rgba(236, 248, 255, 0.8);
+  backdrop-filter: blur(20px);
+}
+
+.editorial-glow {
+  background: linear-gradient(135deg, var(--color-primary-container) 0%, var(--color-surface) 40%);
+}
