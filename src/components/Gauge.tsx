@@ -4,10 +4,10 @@ interface GaugeProps {
 }
 
 function getRisk(score: number) {
-  if (score >= 80) return { label: 'Bajo Riesgo', color: '#4ade80', bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-500' };
-  if (score >= 60) return { label: 'Riesgo Medio', color: '#facc15', bg: 'bg-yellow-50', text: 'text-yellow-700', dot: 'bg-yellow-500' };
-  if (score >= 40) return { label: 'Riesgo Alto', color: '#fb923c', bg: 'bg-orange-50', text: 'text-orange-700', dot: 'bg-orange-500' };
-  return { label: score === 0 ? 'Sin datos' : 'Riesgo Crítico', color: '#fb5151', bg: 'bg-red-50', text: 'text-red-700', dot: 'bg-red-500' };
+  if (score >= 80) return { label: 'Bajo Riesgo', color: '#2d9e6b', bg: 'bg-green-50', text: 'text-green-700', dot: 'bg-green-500' };
+  if (score >= 60) return { label: 'Riesgo Medio', color: '#e8a020', bg: 'bg-yellow-50', text: 'text-yellow-700', dot: 'bg-yellow-500' };
+  if (score >= 40) return { label: 'Riesgo Alto', color: '#C8102E', bg: 'bg-red-50', text: 'text-red-800', dot: 'bg-red-600' };
+  return { label: score === 0 ? 'Sin datos' : 'Riesgo Crítico', color: '#8b0000', bg: 'bg-red-100', text: 'text-red-900', dot: 'bg-red-800' };
 }
 
 export default function Gauge({ score, size = 192 }: GaugeProps) {

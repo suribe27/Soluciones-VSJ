@@ -87,11 +87,11 @@ export default function Results({ score, notasScore, surveyScore }: ResultsProps
       </section>
 
       <div className="space-y-4">
-        <a href="mailto:bienestar@universidad.edu"
-          className="w-full bg-primary text-on-primary font-black py-5 rounded-xl shadow-xl shadow-primary/10 active:scale-95 transition-all flex items-center justify-center gap-3">
-          <span className="text-lg">Contactar bienestar</span>
-          <ArrowRight className="w-6 h-6 border-2 border-white/20 rounded-full p-0.5" />
-        </a>
+      <a href="https://bienestaruniversitario.udemedellin.edu.co/#gsc.tab=0" target="_blank" rel="noopener noreferrer"
+        className="w-full bg-primary text-on-primary font-black py-5 rounded-xl shadow-xl shadow-primary/10 active:scale-95 transition-all flex items-center justify-center gap-3">
+        <span className="text-lg">Contactar bienestar</span>
+        <ArrowRight className="w-6 h-6 border-2 border-white/20 rounded-full p-0.5" />
+      </a>
       </div>
     </motion.div>
   );

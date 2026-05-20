@@ -65,7 +65,7 @@ export default function Subjects({ subjects, onUpdate }: SubjectsProps) {
               <div className="space-y-3">
                 <input value={editName} onChange={e => setEditName(e.target.value)}
                   className="w-full bg-surface-container-low rounded-xl px-4 py-2 text-sm font-semibold text-on-surface outline-none" placeholder="Nombre de la materia" />
-                <input value={editScore} onChange={e => setEditScore(e.target.value)} type="number" min="0" max="5" step="0.1"
+                <input value={editScore} onChange={e => setEditScore(e.target.value.replace(',', '.'))} type="number" min="0" max="5" step="0.1"
                   className="w-full bg-surface-container-low rounded-xl px-4 py-2 text-sm font-semibold text-on-surface outline-none" placeholder="Nota (0.0 - 5.0)" />
                 <div className="flex gap-2">
                   <button onClick={saveEdit} className="flex-1 bg-primary text-on-primary py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2"><Check className="w-4 h-4" /> Guardar</button>
@@ -99,7 +99,7 @@ export default function Subjects({ subjects, onUpdate }: SubjectsProps) {
             className="bg-surface-container-lowest p-6 rounded-lg shadow-sm border border-primary/20 space-y-3">
             <input value={newName} onChange={e => setNewName(e.target.value)}
               className="w-full bg-surface-container-low rounded-xl px-4 py-2 text-sm font-semibold text-on-surface outline-none" placeholder="Nombre de la materia" />
-            <input value={newScore} onChange={e => setNewScore(e.target.value)} type="number" min="0" max="5" step="0.1"
+            <input value={newScore} onChange={e => setNewScore(e.target.value.replace(',', '.'))} type="number" min="0" max="5" step="0.1"
               className="w-full bg-surface-container-low rounded-xl px-4 py-2 text-sm font-semibold text-on-surface outline-none" placeholder="Nota (0.0 - 5.0)" />
             <div className="flex gap-2">
               <button onClick={addSubject} className="flex-1 bg-primary text-on-primary py-2 rounded-xl font-bold text-sm flex items-center justify-center gap-2"><Check className="w-4 h-4" /> Agregar</button>
