@@ -14,15 +14,15 @@ export default function Gauge({ score, size = 192 }: GaugeProps) {
   const radius = 80;
   const strokeWidth = 12;
   const normalizedRadius = radius - strokeWidth / 2;
-  const circumference = normalizedRadius * Math.PI;
-  const strokeDashoffset = circumference - (score / 100) * circumference;
+  const circumference = normalizedRadius * Math.PI * 2;
+  const strokeDashoffset = circumference * (1 - score / 100);
   const risk = getRisk(score);
 
   return (
     <div className="flex flex-col items-center">
-      <div className="relative" style={{ width: size, height: size * 0.6 }}>
+      <div className="relative" style={{ width: size, height: size * 0.65 }}>
         <svg width={size} height={size} viewBox={`0 0 ${radius * 2} ${radius * 2}`}
-          className="transform -rotate-180" style={{ originX: '50%', originY: '50%' }}>
+          className="transform -rotate-90" style={{ originX: '50%', originY: '50%' }}>
           <circle cx={radius} cy={radius} r={normalizedRadius} fill="none"
             stroke="#dff4ff" strokeWidth={strokeWidth}
             strokeDasharray={`${circumference} ${circumference}`} strokeLinecap="round" />

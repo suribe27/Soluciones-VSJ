@@ -44,9 +44,9 @@ export default function Results({ score, notasScore, surveyScore }: ResultsProps
                 initial={{ strokeDashoffset: circumference }}
                 animate={{ strokeDashoffset: offset }}
                 transition={{ duration: 1.5, ease: "easeOut" }}
-                className="text-tertiary-container"
                 cx="96" cy="96" fill="transparent" r="84"
-                stroke="currentColor" strokeWidth="16"
+                stroke={score >= 80 ? '#2d9e6b' : score >= 60 ? '#e8a020' : score >= 40 ? '#C8102E' : '#8b0000'}
+                strokeWidth="15"
                 strokeDasharray={circumference} strokeLinecap="round"
               />
             </svg>
