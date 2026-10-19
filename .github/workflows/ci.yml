@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - uses: actions/setup-node@v4
         with:
@@ -33,6 +35,8 @@ jobs:
     needs: backend-unit-tests
     steps:
       - uses: actions/checkout@v4
+        with:
+          submodules: true
 
       - name: Levantar la app con docker compose
         run: docker compose up --build -d

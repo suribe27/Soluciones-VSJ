@@ -9,14 +9,15 @@ código `VSJ-AT-2026-2`.
 
 ## Aplicaciones y tecnologías
 
-Este repositorio contiene dos aplicaciones (monorepo) más su definición de
-infraestructura local:
+Este repositorio es un **monorepo** que referencia dos aplicaciones como
+**submódulos de Git** (cada una vive en su propio repositorio), más su
+definición de infraestructura local:
 
-| Carpeta | Aplicación | Tecnologías principales |
-| --- | --- | --- |
-| `frontend/` | SPA de React | React 19, TypeScript, Vite 6, TailwindCSS 4 |
-| `backend/` | API REST | Node.js 22, Express 4, TypeScript 5.8, PostgreSQL (`pg`), JWT (`jsonwebtoken`), Swagger/OpenAPI |
-| `db/` | Esquema de base de datos | PostgreSQL 16 (`schema.sql`) |
+| Carpeta | Repositorio | Aplicación | Tecnologías principales |
+| --- | --- | --- | --- |
+| `frontend/` | [soluciones-vsj-frontend](https://github.com/suribe27/soluciones-vsj-frontend) | SPA de React | React 19, TypeScript, Vite 6, TailwindCSS 4 |
+| `backend/` | [soluciones-vsj-backend](https://github.com/suribe27/soluciones-vsj-backend) | API REST | Node.js 22, Express 4, TypeScript 5.8, PostgreSQL (`pg`), JWT (`jsonwebtoken`), Swagger/OpenAPI |
+| `db/` | (este repo) | Esquema de base de datos | PostgreSQL 16 (`schema.sql`) |
 
 Orquestación local: Docker + Docker Compose.
 
@@ -44,9 +45,21 @@ docker pull suribe27/soluciones-vsj-frontend:latest
 
 ## Cómo clonar
 
+`frontend/` y `backend/` son **submódulos de Git** (cada uno es su propio
+repositorio: [soluciones-vsj-frontend](https://github.com/suribe27/soluciones-vsj-frontend),
+[soluciones-vsj-backend](https://github.com/suribe27/soluciones-vsj-backend)).
+Por eso hay que clonar con `--recurse-submodules`:
+
 ```bash
-git clone https://github.com/suribe27/Soluciones-VSJ.git
+git clone --recurse-submodules https://github.com/suribe27/Soluciones-VSJ.git
 cd Soluciones-VSJ
+```
+
+¿Ya clonaste sin `--recurse-submodules` y las carpetas `frontend/` y `backend/`
+te quedaron vacías? Arréglalo con:
+
+```bash
+git submodule update --init --recursive
 ```
 
 ## Cómo ejecutar todo junto con Docker (recomendado)
@@ -122,12 +135,13 @@ junto con la ficha técnica del curso).
 ```
 Soluciones-VSJ/
 ├── docker-compose.yml   # Orquesta los 3 servicios para desarrollo local
+├── .gitmodules           # Declara los dos submódulos de abajo
 ├── db/
 │   └── schema.sql       # Esquema de la base de datos PostgreSQL
-├── backend/
+├── backend/              # Submódulo → github.com/suribe27/soluciones-vsj-backend
 │   ├── Dockerfile
 │   └── src/             # API Express + TypeScript
-└── frontend/
+└── frontend/             # Submódulo → github.com/suribe27/soluciones-vsj-frontend
     ├── Dockerfile
     ├── nginx.conf        # Sirve el build de producción
     └── src/              # SPA de React + TypeScript
