@@ -29,6 +29,19 @@ Orquestación local: Docker + Docker Compose.
 | Documentación de la API (Swagger) | Railway | https://soluciones-vsj-production.up.railway.app/api-docs |
 | Base de datos | Railway (PostgreSQL) | — (acceso interno, no pública) |
 
+## Imágenes en DockerHub
+
+Cada push a `main` que toque `backend/` o `frontend/` publica automáticamente
+(GitHub Actions) sus imágenes en DockerHub:
+
+- `suribe27/soluciones-vsj-backend:latest`
+- `suribe27/soluciones-vsj-frontend:latest`
+
+```bash
+docker pull suribe27/soluciones-vsj-backend:latest
+docker pull suribe27/soluciones-vsj-frontend:latest
+```
+
 ## Cómo clonar
 
 ```bash
