@@ -70,16 +70,36 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       - name: Correr pruebas end-to-end
-        run: npm run test:e2e
+        id: e2e_tests
+        continue-on-error: true
+        run: npm run test:e2e 2>&1 | tee e2e-output.log
         env:
           E2E_BASE_URL: http://localhost:3000
 
+      - name: Reportar salida de las pruebas e2e como anotación
+        if: steps.e2e_tests.outcome == 'failure'
+        run: |
+          {
+            echo "::group::Salida completa de npm run test:e2e"
+            cat e2e-output.log
+            echo "::endgroup::"
+            TAIL=$(tail -c 60000 e2e-output.log)
+            echo "::error::${TAIL}"
+          }
+
       - name: Logs de los servicios (si algo falla)
-        if: failure()
+        if: steps.e2e_tests.outcome == 'failure'
         continue-on-error: true
-        run: docker compose logs
+        run: |
+          echo "::group::docker compose logs"
+          docker compose logs
+          echo "::endgroup::"
 
       - name: Apagar los servicios
         if: always()
         continue-on-error: true
         run: docker compose down -v
+
+      - name: Fallar el job si las pruebas e2e fallaron
+        if: steps.e2e_tests.outcome == 'failure'
+        run: exit 1
