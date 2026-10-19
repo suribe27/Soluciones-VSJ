@@ -1,0 +1,68 @@
+name: soluciones-vsj
+
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: vsj-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: vsj_user
+      POSTGRES_PASSWORD: vsj_password
+      POSTGRES_DB: vsj_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - vsj_db_data:/var/lib/postgresql/data
+      # Postgres ejecuta automáticamente cualquier .sql que encuentre aquí
+      # la PRIMERA vez que se crea el volumen, así que el esquema completo
+      # (tablas, restricciones, índices) queda listo sin pasos manuales.
+      - ./db/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U vsj_user -d vsj_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: vsj-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      PORT: 4000
+      DATABASE_URL: postgresql://vsj_user:vsj_password@db:5432/vsj_db
+      JWT_SECRET: docker-compose-dev-secret-cambiar-en-produccion
+      JWT_EXPIRES_IN: 7d
+      CORS_ORIGIN: http://localhost:3000
+    ports:
+      - "4000:4000"
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:4000/health', r => process.exit(r.statusCode === 200 ? 0 : 1)).on('error', () => process.exit(1))"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+      args:
+        # El navegador del usuario corre FUERA de la red de Docker, así que
+        # necesita la URL publicada en el host (localhost:4000), no el nombre
+        # interno del servicio ("backend") que solo resuelve entre contenedores.
+        VITE_API_URL: http://localhost:4000
+    container_name: vsj-frontend
+    restart: unless-stopped
+    depends_on:
+      backend:
+        condition: service_healthy
+    ports:
+      - "3000:80"
+
+volumes:
+  vsj_db_data:
