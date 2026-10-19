@@ -84,6 +84,20 @@ npm run dev             # http://localhost:3000
 
 Variable de entorno relevante: `VITE_API_URL` (URL del backend; por defecto `http://localhost:4000`).
 
+## Pruebas end-to-end (Playwright)
+
+Con la app corriendo (`docker compose up`, o frontend+backend con `npm run dev` por
+separado) y los usuarios de prueba creados (`npm run db:seed` en `backend/`):
+
+```bash
+npm install              # instala Playwright (raíz del repo)
+npx playwright install --with-deps chromium
+npm run test:e2e
+```
+
+Estas pruebas, junto con las unitarias del backend, corren automáticamente en cada
+`push`/Pull Request a `main` (ver `.github/workflows/ci.yml`).
+
 ## Historias de usuario
 
 Las historias de usuario (HU-01 a HU-05), sus criterios de aceptación y el responsable
