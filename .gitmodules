@@ -1,0 +1,6 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/suribe27/soluciones-vsj-backend
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/suribe27/soluciones-vsj-frontend
