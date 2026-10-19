@@ -1,0 +1,13 @@
+{
+  "name": "soluciones-vsj-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Pruebas end-to-end (Playwright) de Soluciones VSJ. El frontend y el backend viven en sus propias carpetas (frontend/, backend/), cada una con su propio package.json.",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:e2e:ui": "playwright test --ui"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.49.1"
+  }
+}

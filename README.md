@@ -29,6 +29,19 @@ Orquestación local: Docker + Docker Compose.
 | Documentación de la API (Swagger) | Railway | https://soluciones-vsj-production.up.railway.app/api-docs |
 | Base de datos | Railway (PostgreSQL) | — (acceso interno, no pública) |
 
+## Imágenes en DockerHub
+
+Cada push a `main` que toque `backend/` o `frontend/` publica automáticamente
+(GitHub Actions) sus imágenes en DockerHub:
+
+- `suribe27/soluciones-vsj-backend:latest`
+- `suribe27/soluciones-vsj-frontend:latest`
+
+```bash
+docker pull suribe27/soluciones-vsj-backend:latest
+docker pull suribe27/soluciones-vsj-frontend:latest
+```
+
 ## Cómo clonar
 
 ```bash
@@ -83,6 +96,20 @@ npm run dev             # http://localhost:3000
 ```
 
 Variable de entorno relevante: `VITE_API_URL` (URL del backend; por defecto `http://localhost:4000`).
+
+## Pruebas end-to-end (Playwright)
+
+Con la app corriendo (`docker compose up`, o frontend+backend con `npm run dev` por
+separado) y los usuarios de prueba creados (`npm run db:seed` en `backend/`):
+
+```bash
+npm install              # instala Playwright (raíz del repo)
+npx playwright install --with-deps chromium
+npm run test:e2e
+```
+
+Estas pruebas, junto con las unitarias del backend, corren automáticamente en cada
+`push`/Pull Request a `main` (ver `.github/workflows/ci.yml`).
 
 ## Historias de usuario
 
