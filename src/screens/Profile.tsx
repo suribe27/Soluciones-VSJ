@@ -1,7 +1,11 @@
 import { motion } from 'motion/react';
 import { Settings, LogOut, Shield, Bell } from 'lucide-react';
 
-export default function Profile() {
+interface ProfileProps {
+  onLogout: () => void;
+}
+
+export default function Profile({ onLogout }: ProfileProps) {
   const options = [
     { label: 'Notificaciones', icon: Bell },
     { label: 'Privacidad', icon: Shield },
@@ -9,7 +13,7 @@ export default function Profile() {
   ];
 
   return (
-    <motion.div 
+    <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       className="space-y-10"
@@ -18,8 +22,8 @@ export default function Profile() {
         <div className="relative">
           <div className="absolute -inset-4 bg-primary-container/20 blur-2xl rounded-full" />
           <div className="w-32 h-32 rounded-[2.5rem] bg-surface-container-highest flex items-center justify-center overflow-hidden border-4 border-white shadow-xl relative z-10">
-            <img 
-              alt="Avatar" 
+            <img
+              alt="Avatar"
               className="w-full h-full object-cover"
               src="https://lh3.googleusercontent.com/aida-public/AB6AXuBwFXy33SPl_aWJBIWULbP4XkRs13jOAeuVwYqCkU25wwHHSjVEkKaR5ohdGhvdFNqinUcsSWGaYisW5H5KOOCZTs5_4K_xnXZi0N-FfVU16u3WJp1uyh4pfTr_2VEVxoKavcowV5OX2HlfWitq0QJz7s27uAGMbk2-A-0C3yMlAfWo58s_N1q8Z647E0rryrHx27UK97QiSQbKxlW0X3fkBCJHDVtI-_J-WAdf7N7aOcRV8mfPDAJ6K6pl4wDv5w7XIIGRcOHdoDTG"
             />
@@ -35,7 +39,7 @@ export default function Profile() {
         {options.map((option, idx) => {
           const Icon = option.icon;
           return (
-            <button 
+            <button
               key={option.label}
               className={`w-full flex items-center justify-between p-6 hover:bg-surface-container-low transition-colors rounded-xl group ${idx !== options.length - 1 ? 'border-b border-on-surface/5' : ''}`}
             >
@@ -53,7 +57,7 @@ export default function Profile() {
         })}
       </div>
 
-      <button className="w-full py-5 text-error-container font-black hover:bg-error-container/5 rounded-xl transition-colors flex items-center justify-center gap-3">
+      <button onClick={onLogout} className="w-full py-5 text-error-container font-black hover:bg-error-container/5 rounded-xl transition-colors flex items-center justify-center gap-3">
         <LogOut className="w-5 h-5" />
         Cerrar Sesión
       </button>

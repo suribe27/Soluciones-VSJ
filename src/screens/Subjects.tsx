@@ -15,7 +15,7 @@ function getColor(score: number) {
 }
 
 export default function Subjects({ subjects, onUpdate }: SubjectsProps) {
-  const [editing, setEditing] = useState<number | null>(null);
+  const [editing, setEditing] = useState<string | null>(null);
   const [editName, setEditName] = useState('');
   const [editScore, setEditScore] = useState('');
   const [adding, setAdding] = useState(false);
@@ -39,12 +39,14 @@ export default function Subjects({ subjects, onUpdate }: SubjectsProps) {
     setEditing(null);
   };
 
-  const deleteSubject = (id: number) => onUpdate(subjects.filter(s => s.id !== id));
+  const deleteSubject = (id: string) => onUpdate(subjects.filter(s => s.id !== id));
 
   const addSubject = () => {
     const score = parseFloat(newScore);
     if (!newName || isNaN(score) || score < 0 || score > 5) return;
-    onUpdate([...subjects, { id: Date.now(), name: newName, score }]);
+    // Id temporal solo para la actualización optimista en pantalla; el backend
+    // asigna el id real al guardar (ver handleUpdateSubjects en App.tsx).
+    onUpdate([...subjects, { id: crypto.randomUUID(), name: newName, score }]);
     setNewName('');
     setNewScore('');
     setAdding(false);
@@ -135,4 +137,3 @@ export default function Subjects({ subjects, onUpdate }: SubjectsProps) {
     </motion.div>
   );
 }
-
